@@ -75,3 +75,22 @@ void Path::drawWall(SDL_Renderer * renderer, int rotation, int wall) {
         int y2 = len_y * radius;
         SDL_RenderDrawLine(renderer, center.x + x1, center.y + y1, center.x + x2, center.y + y2);
 }
+
+bool Path::hasGap(int x, int y, int rotation) {
+    // float point = this->degree_as_radial*rotation;
+
+    // float len_x = cos(point);
+    // float len_y = sin(point);
+
+    for (int gap : gaps) {
+        if(gap == rotation) {
+            SDL_Log("Gap found at %d, rotation received is %d", gap, rotation);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Path::hasWall(int x, int y, int rotation) {
+    return false;
+}

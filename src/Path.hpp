@@ -22,6 +22,9 @@ public:
     ~Path();
 
     void draw(SDL_Renderer * renderer, int rotation);
+
+    bool hasWall(int x, int y, int rotation);
+    bool hasGap(int x, int y, int rotation);
 };
 
 #endif // PATH_HPP

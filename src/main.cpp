@@ -12,7 +12,7 @@ int main(int argv, char** args) {
     (void) argv;
     (void) args;
 
-    int screen_width = 1920;
+    int screen_width = 1080;
     int screen_height = 1080;
 
     int paths = 10;

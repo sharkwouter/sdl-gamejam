@@ -6,6 +6,7 @@
 
 #include "Input.hpp"
 #include "Path.hpp"
+#include "Ball.hpp"
 
 class Puzzle {
 private:
@@ -13,7 +14,7 @@ private:
 
     SDL_Point center;
     int rotation;
-    SDL_Point ball;
+    Ball ball;
 
     std::vector<Path> paths;
 
