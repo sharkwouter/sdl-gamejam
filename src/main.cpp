@@ -12,10 +12,12 @@ int main(int argv, char** args) {
     (void) argv;
     (void) args;
 
-    int screen_width = 800;
-    int screen_height = 600;
+    int screen_width = 1920;
+    int screen_height = 1080;
 
     int paths = 10;
+
+    srand(time(NULL));
 
     Window window(PROJECT_NAME, screen_width, screen_height);
     Puzzle * puzzle = new Puzzle({screen_width/2, screen_height/2}, screen_height/paths/2, paths);
@@ -55,6 +57,8 @@ int main(int argv, char** args) {
         puzzle->draw(window.renderer);
         window.present();
     }
+
+    delete puzzle;
 
     return 0;
 }

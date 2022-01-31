@@ -4,8 +4,6 @@
 Puzzle::Puzzle(SDL_Point center, int path_width, int paths) {
     this->center = center;
 
-    srand(time(NULL));
-
     // Create paths
     this->paths.reserve(paths);
     for (size_t i = 1; i <= paths; i++) {
@@ -51,7 +49,7 @@ void Puzzle::update() {
     if(this->rotation < 0) {
         this->rotation += 360;
     }
-    if(this->rotation > 360) {
+    if(this->rotation > 359) {
         this->rotation -= 360;
     }
 }

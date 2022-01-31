@@ -1,5 +1,7 @@
 #include "Path.hpp"
 
+#include <math.h>
+
 #include "constants.hpp"
 
 Path::Path(SDL_Point center, int radius, int width, int gap_size, std::vector<int> gaps, std::vector<int> walls) {
