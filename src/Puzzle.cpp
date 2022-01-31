@@ -15,8 +15,12 @@ Puzzle::Puzzle(SDL_Point center, int path_width, int paths) {
             gaps = {0, 180};
             walls = {};
         } else {
-            gaps = {rand() % 360, rand() % 360 , rand() % 360, rand() % 360};
-            walls = {rand() % 360, rand() % 360};
+            if (i == paths) {
+                gaps = {rand() % 360};
+            } else {
+                gaps = {rand() % 360, rand() % 360};
+            }
+            walls = {rand() % 360, rand() % 360, rand() % 360, rand() % 360};
         }
         this->paths.push_back(Path(center, i*path_width, path_width, path_width/2, gaps, walls));
     }

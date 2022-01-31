@@ -12,24 +12,35 @@ int main(int argv, char** args) {
     (void) argv;
     (void) args;
 
-    int screen_height = 800;
-    int screen_width = 600;
+    int screen_width = 800;
+    int screen_height = 600;
 
-    int paths = 4;
-    int path_width = 64;
+    int paths = 10;
 
-    Window window(PROJECT_NAME, screen_height, screen_width);
-    Puzzle * puzzle = new Puzzle({screen_height/2, screen_width/2}, path_width, paths);
+    Window window(PROJECT_NAME, screen_width, screen_height);
+    Puzzle * puzzle = new Puzzle({screen_width/2, screen_height/2}, screen_height/paths/2, paths);
 
     while (true) {
         std::vector<Input> inputs = input_manager.getInputs();
         for (Input i : inputs) {
-            switch (i)
-            {
-            case Input::RESET:
-                delete puzzle;
-                puzzle = new Puzzle({screen_height/2, screen_width/2}, path_width, paths);
-                break;
+            switch (i) {
+                case Input::RESET:
+                    delete puzzle;
+                    puzzle = new Puzzle({screen_width/2, screen_height/2}, screen_height/paths/2, paths);
+                    break;
+                case Input::MINUS:
+                    paths--;
+                    if(paths < 3) {
+                        paths = 3;
+                    }
+                    delete puzzle;
+                    puzzle = new Puzzle({screen_width/2, screen_height/2}, screen_height/paths/2, paths);
+                    break;
+                case Input::PLUS:
+                    paths++;
+                    delete puzzle;
+                    puzzle = new Puzzle({screen_width/2, screen_height/2}, screen_height/paths/2, paths);
+                    break;
             }
         }
         
