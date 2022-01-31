@@ -1,18 +1,21 @@
 #include "Window.hpp"
 
-Window::Window(const std::string &title, int width, int height, OptionManager * options) {
+Window::Window(const std::string &title, int width, int height) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_GAMECONTROLLER | SDL_INIT_TIMER) != 0) {
-        panic("couldn't init SDL: " + std::string(SDL_GetError()));
+        SDL_Log("couldn't init SDL: %s", SDL_GetError());
+        exit(1);
     }
 
     this->window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
     if (this->window == nullptr) {
-        panic("couldn't create window: " + std::string(SDL_GetError()));
+        SDL_Log("couldn't create window: %s", SDL_GetError());
+        exit(1);
     }
 
     this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (this->renderer == nullptr) {
-        panic("couldn't create renderer: " + std::string(SDL_GetError()));
+        SDL_Log("couldn't create renderer: %s", SDL_GetError());
+        exit(1);
     }
 
     // Make the use of transparancy possible

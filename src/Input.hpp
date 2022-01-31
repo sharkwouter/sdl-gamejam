@@ -10,6 +10,7 @@ enum class Input {
     LEFT,
     RIGHT,
     MENU,
+    RESET,
     NONE
 };
 

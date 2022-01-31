@@ -62,6 +62,9 @@ Input InputManager::getInputFromKeyboard(SDL_Keycode key) {
         case SDLK_BACKSPACE:
             event = Input::CANCEL;
             break;
+        case SDLK_r:
+            event = Input::RESET;
+            break;
         case SDLK_ESCAPE:
             event = Input::MENU;
             break;
@@ -89,6 +92,9 @@ Input InputManager::getInputFromControllerButton(Uint32 button) {
             break;
         case SDL_CONTROLLER_BUTTON_B:
             event = Input::CANCEL;
+            break;
+        case SDL_CONTROLLER_BUTTON_BACK:
+            event = Input::RESET;
             break;
         case SDL_CONTROLLER_BUTTON_START:
             event = Input::MENU;
