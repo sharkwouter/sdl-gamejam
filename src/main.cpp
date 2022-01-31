@@ -38,6 +38,9 @@ int main(int argv, char** args) {
                     break;
                 case Input::PLUS:
                     paths++;
+                    if(paths > 18) {
+                        paths = 18;
+                    }
                     delete puzzle;
                     puzzle = new Puzzle({screen_width/2, screen_height/2}, screen_height/paths/2, paths);
                     break;
