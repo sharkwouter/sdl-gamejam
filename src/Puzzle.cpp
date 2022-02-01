@@ -1,5 +1,4 @@
 #include "Puzzle.hpp"
-#include <time.h>
 
 Puzzle::Puzzle(SDL_Point center, int path_width, int paths) {
     this->center = center;

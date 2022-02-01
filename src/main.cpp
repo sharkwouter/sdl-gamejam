@@ -17,9 +17,10 @@ int main(int argv, char** args) {
 
     int paths = 10;
 
-    srand(time(NULL));
-
     Window window(PROJECT_NAME, screen_width, screen_height);
+
+    srand(SDL_GetTicks());
+
     Puzzle * puzzle = new Puzzle({screen_width/2, screen_height/2}, screen_height/paths/2, paths);
 
     while (true) {
