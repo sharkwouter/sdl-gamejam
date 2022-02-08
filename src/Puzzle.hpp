@@ -18,6 +18,8 @@ private:
 
     std::vector<Path> paths;
 
+    bool done;
+
     void drawBall(SDL_Renderer * renderer);
 public:
     Puzzle(SDL_Point center, int path_width, int paths);
@@ -26,6 +28,8 @@ public:
     void update();
     void handleInputs(std::vector<Input> inputs);
     void draw(SDL_Renderer * renderer);
+
+    bool isDone() {return this->done;};
 };
 
 #endif // PUZZLE_HPP

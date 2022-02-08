@@ -10,19 +10,20 @@ Puzzle::Puzzle(SDL_Point center, int path_width, int paths) {
         std::vector<int> gaps;
         std::vector<int> walls;
         if (i == 1) {
-            gaps = {90};
-            walls = {};
-        } else if (i == 2) {
-            gaps = {180};
-            walls = {};
+            gaps = {0, 180};
+        } else if (i == paths) {
+            gaps = {(rand() % 8) * 45};
         } else {
-            if (i == paths) {
-                gaps = {rand() % 360};
-            } else {
-                gaps = {0, rand() % 360, rand() % 360};
+            for(int d = 0; d < 360; d+=45) {
+                if(rand() % 4 == 1) {
+                    gaps.push_back(d);
+                }
             }
-            walls = {rand() % 360, rand() % 360, rand() % 360, rand() % 360};
+            if (gaps.size() < 1) {
+                gaps = {(rand() % 8) * 45};
+            }
         }
+
         this->paths.push_back(Path(center, i*path_width, this->path_width, this->path_width/2, gaps, walls));
     }
     
@@ -36,6 +37,10 @@ Puzzle::~Puzzle() {
 }
 
 void Puzzle::handleInputs(std::vector<Input> inputs) {
+    if (this->done) {
+        return;
+    }
+
     for (Input i : inputs) {
         switch (i) {
             case Input::LEFT:
@@ -53,13 +58,20 @@ void Puzzle::handleInputs(std::vector<Input> inputs) {
 }
 
 void Puzzle::update() {
+    if (this->ball.y > (this->center.y + (this->path_width*(int)this->paths.size()))) {
+        this->done = true;
+    }
+
+    if (this->done) {
+        return;
+    }
+
     if(this->rotation < 0) {
         this->rotation += 360;
     }
     if(this->rotation > 359) {
         this->rotation -= 360;
     }
-    // SDL_Log("%d", this->rotation);
 
     int ball_path = (ball.y+ball.radius-center.y)/this->path_width+1;
     int path_floor = center.y+ball_path*this->path_width-1;
@@ -75,7 +87,6 @@ void Puzzle::update() {
             test-=360;
         }
         if(this->paths[ball_path-1].hasGap(0, 0, test)) {
-            SDL_Log("gap found at %d", test);
             ball.y++;
         }
     }

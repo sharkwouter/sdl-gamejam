@@ -24,6 +24,11 @@ int main(int argv, char** args) {
     Puzzle * puzzle = new Puzzle({screen_width/2, screen_height/2}, screen_height/paths/2, paths);
 
     while (true) {
+        if (puzzle->isDone()) {
+            delete puzzle;
+            puzzle = new Puzzle({screen_width/2, screen_height/2}, screen_height/paths/2, paths);
+        }
+
         std::vector<Input> inputs = input_manager.getInputs();
         for (Input i : inputs) {
             switch (i) {
